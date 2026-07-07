@@ -6,6 +6,7 @@
   
   <title>مؤسسة محمد أحمد ادخيل للمقاولات العامة | General Contracting</title>
   <meta name="description" content="مؤسسة محمد أحمد ادخيل للمقاولات العامة بالمنطقة الشرقية - خدمات بناء وتشييد، تشطيبات، ترميم، وتنسيق مواقع بأعلى معايير الجودة والدقة الهندسية.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -468,7 +469,7 @@
             <span class="lang-ar">تنفيذ المشاريع السكنية والتجارية والصناعية من مرحلة التأسيس (العظم) وحتى تسليم المفتاح بأعلى المعايير الهندسية.</span>
             <span class="lang-en">Execution of residential, commercial, and industrial projects from the foundation stage (skeleton) to turnkey delivery under the highest engineering standards.</span>
           </p>
-          <button onclick="bookService('بناء وتشييد')" class="btn-primary" style="width: 100%; margin-top: 1.5rem; padding: 10px; font-size: 0.9rem; justify-content: center;">
+          <button data-book-service="بناء وتشييد" class="btn-primary" style="width: 100%; margin-top: 1.5rem; padding: 10px; font-size: 0.9rem; justify-content: center;">
             <span class="lang-ar">احجز الخدمة الآن</span>
             <span class="lang-en">Book Service Now</span>
           </button>
@@ -497,7 +498,7 @@
             <span class="lang-ar">تنفيذ كافة أعمال الديكور والدهانات والأرضيات والواجهات بلمسة فنية راقية تعكس ذوق العميل.</span>
             <span class="lang-en">Execution of all decoration, painting, flooring, and facade works with a sophisticated artistic touch that reflects the client's taste.</span>
           </p>
-          <button onclick="bookService('تشطيبات داخلية وخارجية')" class="btn-primary" style="width: 100%; margin-top: 1.5rem; padding: 10px; font-size: 0.9rem; justify-content: center;">
+          <button data-book-service="تشطيبات داخلية وخارجية" class="btn-primary" style="width: 100%; margin-top: 1.5rem; padding: 10px; font-size: 0.9rem; justify-content: center;">
             <span class="lang-ar">احجز الخدمة الآن</span>
             <span class="lang-en">Book Service Now</span>
           </button>
@@ -525,7 +526,7 @@
             <span class="lang-ar">تجديد المباني القائمة وصيانة المرافق للحفاظ على جودتها وإطالة عمرها الافتراضي بأفضل الحلول.</span>
             <span class="lang-en">Renovating existing buildings and maintaining facilities to preserve their quality and extend their lifespan using the best solutions.</span>
           </p>
-          <button onclick="bookService('ترميم وصيانة')" class="btn-primary" style="width: 100%; margin-top: 1.5rem; padding: 10px; font-size: 0.9rem; justify-content: center;">
+          <button data-book-service="ترميم وصيانة" class="btn-primary" style="width: 100%; margin-top: 1.5rem; padding: 10px; font-size: 0.9rem; justify-content: center;">
             <span class="lang-ar">احجز الخدمة الآن</span>
             <span class="lang-en">Book Service Now</span>
           </button>
@@ -553,7 +554,7 @@
             <span class="lang-ar">التمديدات الأساسية والخدمات المساندة للمشاريع العمرانية لضمان اكتمال المشروع من كل جوانبه.</span>
             <span class="lang-en">Basic installations and supporting services for urban projects to ensure completion of the project in all its aspects.</span>
           </p>
-          <button onclick="bookService('بنية تحتية وتنسيق مواقع')" class="btn-primary" style="width: 100%; margin-top: 1.5rem; padding: 10px; font-size: 0.9rem; justify-content: center;">
+          <button data-book-service="بنية تحتية وتنسيق مواقع" class="btn-primary" style="width: 100%; margin-top: 1.5rem; padding: 10px; font-size: 0.9rem; justify-content: center;">
             <span class="lang-ar">احجز الخدمة الآن</span>
             <span class="lang-en">Book Service Now</span>
           </button>
@@ -941,7 +942,7 @@ Qatif 32653, Al-Tobi, King Faisal Street</span>
                   <span class="lang-en">Service Required *</span>
                 </label>
                 <select id="f-service" name="service" required data-default-ar="-- اختر الخدمة المطلوبة --" data-default-en="-- Select Required Service --">
-                  <option value="" disabled selected>-- اختر الخدمة --</option>
+                  <option value="" disabled selected>-- اختر الخدمة المطلوبة --</option>
                   <option value="بناء وتشييد" class="lang-ar">بناء وتشييد</option>
                   <option value="بناء وتشييد" class="lang-en">Building & Construction</option>
                   <option value="تشطيبات داخلية وخارجية" class="lang-ar">تشطيبات داخلية وخارجية</option>
@@ -961,7 +962,7 @@ Qatif 32653, Al-Tobi, King Faisal Street</span>
                   <span class="lang-en">City / Location in Eastern Province *</span>
                 </label>
                 <select id="f-location" name="location" required data-default-ar="-- اختر المدينة السكنية --" data-default-en="-- Select Residential City --">
-                  <option value="" disabled selected>-- اختر المدينة --</option>
+                  <option value="" disabled selected>-- اختر المدينة السكنية --</option>
                   <option value="القطيف" class="lang-ar">القطيف</option>
                   <option value="القطيف" class="lang-en">Qatif</option>
                   <option value="الدمام" class="lang-ar">الدمام</option>
@@ -1022,12 +1023,12 @@ Qatif 32653, Al-Tobi, King Faisal Street</span>
       </div>
 
       <div style="display: flex; gap: 1.5rem; margin-top: 1rem;">
-        <button onclick="openModal('terms-modal')" style="background: none; border: none; color: var(--gold-lt); font-size: 0.85rem; font-weight: 700; cursor: pointer;">
+        <button data-modal-open="terms-modal" style="background: none; border: none; color: var(--gold-lt); font-size: 0.85rem; font-weight: 700; cursor: pointer;">
           <span class="lang-ar">الشروط والأحكام</span>
           <span class="lang-en">Terms & Conditions</span>
         </button>
         <span style="color: rgba(255, 255, 255, 0.2);">|</span>
-        <button onclick="openModal('privacy-modal')" style="background: none; border: none; color: var(--gold-lt); font-size: 0.85rem; font-weight: 700; cursor: pointer;">
+        <button data-modal-open="privacy-modal" style="background: none; border: none; color: var(--gold-lt); font-size: 0.85rem; font-weight: 700; cursor: pointer;">
           <span class="lang-ar">سياسة الخصوصية</span>
           <span class="lang-en">Privacy Policy</span>
         </button>
@@ -1060,7 +1061,7 @@ Qatif 32653, Al-Tobi, King Faisal Street</span>
   <!-- ══════════ MODAL: TERMS & CONDITIONS ══════════ -->
   <div class="modal-backdrop" id="terms-modal" style="display: none;">
     <div class="modal-window">
-      <button class="modal-close-btn" onclick="closeModal('terms-modal')" aria-label="Close">✕</button>
+      <button class="modal-close-btn" data-modal-close aria-label="Close">✕</button>
       <h2 class="modal-title">
         <span class="lang-ar">الشروط والأحكام</span>
         <span class="lang-en">Terms & Conditions</span>
@@ -1106,7 +1107,7 @@ Qatif 32653, Al-Tobi, King Faisal Street</span>
   <!-- ══════════ MODAL: PRIVACY POLICY ══════════ -->
   <div class="modal-backdrop" id="privacy-modal" style="display: none;">
     <div class="modal-window">
-      <button class="modal-close-btn" onclick="closeModal('privacy-modal')" aria-label="Close">✕</button>
+      <button class="modal-close-btn" data-modal-close aria-label="Close">✕</button>
       <h2 class="modal-title">
         <span class="lang-ar">سياسة الخصوصية</span>
         <span class="lang-en">Privacy Policy</span>
@@ -1154,6 +1155,6 @@ Qatif 32653, Al-Tobi, King Faisal Street</span>
   </div>
 
   <!-- JavaScript -->
-  <script src="assets/js/main.js?v=2.1"></script>
+  <script src="assets/js/main.js?v=2.2"></script>
 </body>
 </html>

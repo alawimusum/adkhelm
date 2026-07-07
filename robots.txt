@@ -1,0 +1,5 @@
+# robots.txt for https://adkhelm.com/
+User-agent: *
+Allow: /
+
+Sitemap: https://adkhelm.com/sitemap.xml

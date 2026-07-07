@@ -13,16 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const contactForm = document.querySelector("#contact-form");
   const serviceSelect = document.querySelector("#f-service");
   const locationSelect = document.querySelector("#f-location");
-  
-  // Modals
-  const privacyModal = document.querySelector("#privacy-modal");
-  const termsModal = document.querySelector("#terms-modal");
 
   /* ─── INITIALIZATION ───────────────────────────────────── */
   const savedLang = localStorage.getItem("lang");
   const savedTheme = localStorage.getItem("theme");
 
-  // Determine starting language
   if (savedLang === "ar" || savedLang === "en") {
     lang = savedLang;
   } else {
@@ -30,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
     lang = browserLang === "en" ? "en" : "ar";
   }
 
-  // Determine starting theme
   if (savedTheme === "light" || savedTheme === "dark") {
     theme = savedTheme;
   } else {
@@ -44,15 +38,11 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ─── SCROLL MONITORING ───────────────────────────────── */
   const handleScroll = () => {
     const scrollY = window.scrollY;
-    
-    // Navbar background transition
     if (scrollY > 40) {
       navbar.classList.add("scrolled");
     } else {
       navbar.classList.remove("scrolled");
     }
-
-    // Back to top button visibility
     if (scrollY > 400) {
       bttButton.classList.add("show");
     } else {
@@ -61,9 +51,8 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   window.addEventListener("scroll", handleScroll, { passive: true });
-  handleScroll(); // Run immediately
+  handleScroll();
 
-  // Back to top click handler
   bttButton.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
@@ -74,7 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
     mobileMenu.classList.toggle("open");
   });
 
-  // Close mobile menu when links are clicked
   document.querySelectorAll(".mobile-link").forEach(link => {
     link.addEventListener("click", () => {
       hamburger.classList.remove("open");
@@ -89,37 +77,31 @@ document.addEventListener("DOMContentLoaded", () => {
     htmlEl.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
     localStorage.setItem("lang", lang);
 
-    // Update form placeholders dynamically based on attributes
     document.querySelectorAll("[data-placeholder-ar]").forEach(el => {
-      el.placeholder = lang === "ar" 
-        ? el.getAttribute("data-placeholder-ar") 
+      el.placeholder = lang === "ar"
+        ? el.getAttribute("data-placeholder-ar")
         : el.getAttribute("data-placeholder-en");
     });
 
-    // Update select option labels
     updateSelectOptionsText();
 
-    // Toggle button active labels in UI
     document.querySelectorAll(".lang-toggle-btn-text").forEach(el => {
       el.textContent = lang === "ar" ? "English" : "عربي";
     });
   }
 
   function updateSelectOptionsText() {
-    // Service Select placeholders
     const serviceDefault = serviceSelect.options[0];
-    serviceDefault.textContent = lang === "ar" 
-      ? serviceSelect.getAttribute("data-default-ar") 
+    serviceDefault.textContent = lang === "ar"
+      ? serviceSelect.getAttribute("data-default-ar")
       : serviceSelect.getAttribute("data-default-en");
 
-    // Location Select placeholders
     const locationDefault = locationSelect.options[0];
-    locationDefault.textContent = lang === "ar" 
-      ? locationSelect.getAttribute("data-default-ar") 
+    locationDefault.textContent = lang === "ar"
+      ? locationSelect.getAttribute("data-default-ar")
       : locationSelect.getAttribute("data-default-en");
   }
 
-  // Bind click handlers to language toggles
   document.querySelectorAll(".lang-toggle").forEach(btn => {
     btn.addEventListener("click", () => {
       applyLanguage(lang === "ar" ? "en" : "ar");
@@ -132,7 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
     htmlEl.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
 
-    // Update theme toggle icons (show moon for light theme, sun for dark theme)
     document.querySelectorAll(".theme-toggle").forEach(btn => {
       const sunIcon = btn.querySelector(".sun-icon");
       const moonIcon = btn.querySelector(".moon-icon");
@@ -146,7 +127,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Bind click handlers to theme toggles
   document.querySelectorAll(".theme-toggle").forEach(btn => {
     btn.addEventListener("click", () => {
       applyTheme(theme === "light" ? "dark" : "light");
@@ -154,32 +134,65 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ─── INTERACTION: BOOK SERVICE ────────────────────────── */
-  window.bookService = (serviceKey) => {
+  function bookService(serviceKey) {
     serviceSelect.value = serviceKey;
     const contactSection = document.getElementById("contact");
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: "smooth" });
     }
-  };
+  }
+  // يبقى معرّض على window للتوافق الرجعي فقط إذا بقي أي onclick قديم في HTML
+  window.bookService = bookService;
+
+  // الطريقة الآمنة والمفضّلة: أزرار عليها data-book-service بدل onclick المضمّن
+  document.querySelectorAll("[data-book-service]").forEach(btn => {
+    btn.addEventListener("click", () => bookService(btn.dataset.bookService));
+  });
 
   /* ─── MODAL CONTROLS ───────────────────────────────────── */
-  window.openModal = (modalId) => {
+  function openModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
       modal.style.display = "flex";
-      document.body.style.overflow = "hidden"; // Prevent scrolling behind modal
+      document.body.style.overflow = "hidden";
     }
-  };
-
-  window.closeModal = (modalId) => {
+  }
+  function closeModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
       modal.style.display = "none";
       document.body.style.overflow = "";
     }
-  };
+  }
+  window.openModal = openModal;
+  window.closeModal = closeModal;
 
-  // Close modals when clicking backdrop
+  document.querySelectorAll("[data-modal-open]").forEach(btn => {
+    btn.addEventListener("click", () => openModal(btn.dataset.modalOpen));
+  });
+
+  document.querySelectorAll("[data-modal-close]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const modal = btn.closest(".modal-backdrop");
+      if (modal) {
+        modal.style.display = "none";
+        document.body.style.overflow = "";
+      }
+    });
+  });
+
+  // إغلاق المودال بالضغط على المفتاح Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      document.querySelectorAll(".modal-backdrop").forEach(modal => {
+        if (modal.style.display === "flex") {
+          modal.style.display = "none";
+          document.body.style.overflow = "";
+        }
+      });
+    }
+  });
+
   document.querySelectorAll(".modal-backdrop").forEach(backdrop => {
     backdrop.addEventListener("click", (e) => {
       if (e.target === backdrop) {
@@ -199,7 +212,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const city = locationSelect.value || "غير محدد / Unspecified";
     const msg = document.querySelector("#f-msg").value || "لا توجد تفاصيل / No details";
 
-    // Format WhatsApp message template based on current language
     const whatsappMessage = lang === "ar"
       ? `مرحباً مؤسسة محمد أحمد ادخيل للمقاولات،
 لدي طلب خدمة جديد من الموقع الإلكتروني:
@@ -223,17 +235,17 @@ I have a new service request from the website:
 ${msg}`;
 
     const encodedMessage = encodeURIComponent(whatsappMessage);
-    const whatsappNumber = "966508900022"; 
+    const whatsappNumber = "966508900022";
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
-    // Open WhatsApp redirect in new tab
-    window.open(whatsappUrl, "_blank");
+    // إصلاح أمني: إضافة noopener,noreferrer لمنع هجوم Reverse Tabnabbing
+    // (بدونها تقدر صفحة wa.me تتحكم بـ window.opener وتعيد توجيه تبويب موقعك الأصلي)
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 
-    // Display localized redirection toast
     toast.classList.add("show");
     contactForm.reset();
     serviceSelect.value = "";
-    
+
     setTimeout(() => {
       toast.classList.remove("show");
     }, 4000);
@@ -241,7 +253,7 @@ ${msg}`;
 
   /* ─── SCROLL REVEAL (INTERSECTION OBSERVER) ───────────── */
   const revealElements = document.querySelectorAll(".reveal");
-  
+
   if (revealElements.length > 0) {
     const revealObserver = new IntersectionObserver(
       (entries) => {
