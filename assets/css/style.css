@@ -1282,6 +1282,19 @@ a.ci-value:hover {
     justify-items: center;
     padding-top: 100px;
   }
+  .hero-eyebrow {
+    justify-content: center;
+    font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+  }
+  .hero-eyebrow::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 2px;
+    background: var(--gold);
+  }
   .hero-sub {
     margin-right: auto;
     margin-left: auto;
@@ -1330,6 +1343,18 @@ a.ci-value:hover {
   .hero-title {
     font-size: clamp(1.8rem, 8vw, 2.6rem);
   }
+  .hero-eyebrow {
+    font-size: clamp(0.75rem, 2.8vw, 0.82rem);
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    border-bottom: 1.5px solid var(--gold);
+    padding-bottom: 4px;
+    margin-bottom: 1rem;
+  }
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
+    display: none !important;
+  }
 
   /* Prevent logo & controls from wrapping or overlapping on small screens */
   .nav-logo {
@@ -1346,7 +1371,9 @@ a.ci-value:hover {
     display: none;
   }
   .nav-controls .theme-toggle {
-    display: none; /* Hide from navbar header on mobile */
+    display: inline-flex;
+    height: 34px;
+    width: 34px;
   }
   .lang-toggle {
     height: 34px;
@@ -1362,6 +1389,14 @@ a.ci-value:hover {
   .lang-toggle {
     padding: 0 6px !important;
     font-size: 0.72rem !important;
+  }
+  .nav-controls .theme-toggle {
+    height: 32px;
+    width: 32px;
+  }
+  .nav-controls .theme-toggle svg {
+    width: 15px;
+    height: 15px;
   }
   .services-grid {
     grid-template-columns: 1fr;
@@ -1783,9 +1818,11 @@ a.ci-value:hover {
 }
 
 /* ─── LANGUAGE VISIBILITY RULES ─────────────────────────── */
-html[lang="ar"] .lang-en {
+html[lang="ar"] .lang-en,
+html[lang="ar"] .lang-flag-en {
   display: none !important;
 }
-html[lang="en"] .lang-ar {
+html[lang="en"] .lang-ar,
+html[lang="en"] .lang-flag-ar {
   display: none !important;
 }

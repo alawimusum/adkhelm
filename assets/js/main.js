@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Toggle button active labels in UI
     document.querySelectorAll(".lang-toggle-btn-text").forEach(el => {
-      el.textContent = lang === "ar" ? "EN" : "عربي";
+      el.textContent = lang === "ar" ? "English" : "عربي";
     });
   }
 
